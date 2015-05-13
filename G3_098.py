@@ -10,7 +10,7 @@ QUESTION_CATEGORY = {
             "skill": "Number Patterns"
             }
 
-max_questions = 10
+max_questions = 400
 
 listOfCombinations = []
 
@@ -28,6 +28,8 @@ def main():
 				k = random.randint(1,20)
 			m = j*x
 			n = k*x;
+			j,n = random.sample([j,n],2)
+		        k,m = random.sample([k,m],2)
 			if [j,k,m,n] in listOfCombinations:
 				continue
 			else:
@@ -42,13 +44,18 @@ def main():
 def generatequestion(j,k,m,n,z): 
 	builder = Builder(DEVELOPER_ID, QUESTION_CATEGORY)
 	questions_text = ["Fill the gap:","Put the correct integer in the gap to make the fractions equal:","Fill in the missing value:"]
-	builder.text(""+questions_text[random.randint(0,2)].upper()+"\n", center=True,  color=RED_TEXT_COLOR,font_size=LARGE_FONT_SIZE)
+	builder.text(""+questions_text[random.randint(0,2)]+"\n", center=True,  color=RED_TEXT_COLOR,font_size=LARGE_FONT_SIZE)
+	builder.break_line()
 	block_list=[]	   
 	block = builder.Block()
-	block.text(str(j)+"/"+str(k)+" = " , center=False, color=RED_TEXT_COLOR)
+	block.text(str(j), center=False, color=GREEN_TEXT_COLOR)
+	block.text("/", center=False, color=RED_TEXT_COLOR)
+	block.text(str(k), center=False, color=GREEN_TEXT_COLOR)
+	block.text(" = ", center=False, color=RED_TEXT_COLOR)
 	builder.break_line()
 	block.textbox(m,font_size=LARGE_FONT_SIZE)
-	block.text("/"+str(n),center=False, color=RED_TEXT_COLOR)
+	block.text("/",center=False, color=RED_TEXT_COLOR)
+	block.text(str(n),center=False, color =GREEN_TEXT_COLOR)
 	block_list.append(block)
 	print z
 	builder.blocks(block_list,center=True)
