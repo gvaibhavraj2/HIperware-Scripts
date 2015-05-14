@@ -6,8 +6,8 @@ DEVELOPER_ID = "vaibhav@hiperware.com"
 QUESTION_CATEGORY = {
             "grade": "Third",
             "subject": "Math",
-            "skill_group": "Number Patterns",
-            "skill": "Number Patterns"
+            "skill_group": "Fractions",
+            "skill": "Comparing Fractions: Part2"
             }
 
 max_questions = 400
@@ -32,6 +32,8 @@ def main():
 		        k,m = random.sample([k,m],2)
 			if [j,k,m,n] in listOfCombinations:
 				continue
+			elif j==m or k==n:
+				continue
 			else:
 				listOfCombinations.append([j,k,m,n])
 				flag = 1
@@ -43,7 +45,7 @@ def main():
 
 def generatequestion(j,k,m,n,z): 
 	builder = Builder(DEVELOPER_ID, QUESTION_CATEGORY)
-	questions_text = ["Fill the gap:","Put the correct integer in the gap to make the fractions equal:","Fill in the missing value:"]
+	questions_text = ["Fill the blank:","Fill in a number which completes the fraction:","Complete the fraction:"]
 	builder.text(""+questions_text[random.randint(0,2)]+"\n", center=True,  color=RED_TEXT_COLOR,font_size=LARGE_FONT_SIZE)
 	builder.break_line()
 	block_list=[]	   
