@@ -19,7 +19,7 @@ QUESTION_CATEGORY = {
 p = inflect.engine()
 
 dict = {'evenly divided among': [['basket', 'box'],['book', 'key', 'lemon', 'lollypop',' cake',' medal', 'pencil',' shell',' strawberry']],
-'made money selling':['balloon', 'basket', 'bell', 'burger', 'cake', 'hotdog', 'glasses of lemonade', 'lollypop', 'pencil', 'plant', 'rose', 'strawberry', 't-shirt'],
+'made selling':['balloon', 'basket', 'bell', 'burger', 'cake', 'hotdog', 'glasses of lemonade', 'lollypop', 'pencil', 'plant', 'rose', 'strawberry', 't-shirt'],
 'A was carrying people': [['If there are people in each'],['train','plane'],['car','row']],
 
 };
@@ -67,12 +67,13 @@ def generatequestion(j,m,n,z):
 		builder = Builder(DEVELOPER_ID, QUESTION_CATEGORY)
 		block = builder.Block()
 		sentences = dict.keys()
-		r = range(2,50)
+		r = range(2,25)
 		l = random.randint(0,3)
 		#print(sentences)
 		if l==2 :
-			object1 = random.choice(dict.get(sentences[l])[1])
-			object2 = random.choice(dict.get(sentences[l])[2])
+			v = random.randint(0,1)
+			object1 = dict.get(sentences[l])[1][v]
+			object2 = dict.get(sentences[l])[2][v]
 			#print(object_of_the_question)
 			split_sentence = sentences[l].split(" ")
 			split_sentence.insert(1,object1)
@@ -123,7 +124,7 @@ def generatequestion(j,m,n,z):
 			block.text(" "+split_sentence[4]+" ",color=GREEN_TEXT_COLOR)
 			sentence2 = " ".join(split_sentence[5:])
 			block.text(sentence2)
-			block.text("How many pages can "+person1+ " read in one hour ?\n")
+			block.text(" How many pages can "+person1+ " read in one hour ?\n")
 		else :
 			object1 = random.choice(dict.get(sentences[l]))
 			person1 = random.choice(eval(boy_or_girl[j]))
@@ -131,16 +132,16 @@ def generatequestion(j,m,n,z):
 			split_sentence = sentences[l].split(" ")
 			split_sentence.insert(1,str(m)+"$")
 			#split_sentence.insert(3," "+p.plural(object2))
-			split_sentence.insert(4,str(n))
-			split_sentence.insert(5," "+p.plural(object1))
+			split_sentence.insert(3,str(n))
+			split_sentence.insert(4," "+p.plural(object1))
 			block.text(person1+" "+split_sentence[0]+" ")
 			block.text(" "+split_sentence[1]+" ",color=GREEN_TEXT_COLOR)
-			sentence1 = split_sentence[2]+" "+split_sentence[3]
+			sentence1 = split_sentence[2]+" "
 			block.text(sentence1)
-			block.text(" "+split_sentence[4],color=GREEN_TEXT_COLOR)
-			sentence2 = " ".join(split_sentence[5:])
+			block.text(" "+split_sentence[3],color=GREEN_TEXT_COLOR)
+			sentence2 = " ".join(split_sentence[4:])
 			block.text(sentence2)
-			block.text(". How much money did each "+object1+ " cost?\n")
+			block.text(". How much did he sell each "+object1+ " for ?\n")
 											
 		builder.block(block,center = True)
 								
