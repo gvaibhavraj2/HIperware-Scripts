@@ -36,13 +36,13 @@ questions = [
 					[girl_names,boy_names],['counted'], ['book', 'clock', 'computer', 'hat', 'pencil', 'phone', 'teacher'],['at school. '],[girl_names,boy_names],['counted'],['. How many'],['did they count together?']
 					],
 	        	[
-	        		[girl_names,boy_names],['saw'], ['bottle', 'shopping_cart'],['at the store. '],[girl_names,boy_names],['saw'],['. How many'],['did they see together?']
+	        		[girl_names,boy_names],['saw'], ['bottle', 'shoppingcart'],['at the store. '],[girl_names,boy_names],['saw'],['. How many'],['did they see together?']
 	        		],
 	           	[
 	           		[girl_names,boy_names],['scored'], ['in a videogame and'],[girl_names,boy_names],['scored'],['points. How many points did they count together?']
 	           		],
 	           	[
-	           		[girl_names,boy_names],['has'],['red'], ['bells', 'stickers', 'pencil'],['and'],['yellow'],['saw'],['. How many'],['does'],['have in total?']
+	           		[girl_names,boy_names],['has'],['red'], ['bell', 'pencil'],['and'],['yellow'],['. How many'],['does'],['have in total?']
 	           		],
 	           	[
 	           		['At the aquarium, there are'],['fish in the arctic tank, and'], ['fish in the tropical tank. How many fish are there in total?']
@@ -56,8 +56,13 @@ questions = [
 	           	[
 	           		['To get ready for her party on'],[', Sarah got'],['balloon', 'lollypop', 'glasses of lemonade', 'chunks of pineapple', 'strawberry', 'hotdog', 'burger',  'icecream', 'bread'],['on'],['and then'],['on'],['. How many'],['did Sarah have in total for her party?']
 	           		],
+	           	[
+					[girl_names,boy_names],['counted'], ['car', 'bike', 'house', 'trees'],['on the way to school. '],[girl_names,boy_names],['counted'],['. How many'],['did they see together?']
+					],	
+				[
+					[girl_names,boy_names],['counted'], ['beach-ball', 'beach-chair'],['at the beach. '],[girl_names,boy_names],['counted'],['. How many'],['did they count together?']
+					],	
 	       	]	
-
 
 
 boy_or_girl = ["girl_names","boy_names"]
@@ -65,6 +70,7 @@ boy_or_girl = ["girl_names","boy_names"]
 his_or_her = ["her","his"]
 
 verbs = ["see","pack","have","see","count","count","count","count","get"]
+days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
 max_questions = 400
 
@@ -82,7 +88,7 @@ def main():
 			n = random.randrange(2,21-m)
 			l = random.randint(0,8)
 			#print j,k,m,n,l
-			qnum = random.choice([1,0])
+			qnum = random.choice([0,1,3,4,5,6,7,8])
 	      		h_s = random.randint(0,1)
 			if [m,n,l,qnum,h_s] in listOfCombinations:
 				continue
@@ -148,7 +154,7 @@ def generatequestion(j,k,m,n,l,qnum,h_s,z):
 			objectToBeDrawn = obj1
 		else:
 			objectToBeDrawn = obj1.split(" ")[2]
-	elif qnum==1 or qnum==0:
+	elif qnum==1 or qnum==0 or qnum==8 or qnum==7:
 		person1 = random.choice(eval(boy_or_girl[j]))
 		person2 = random.choice(eval(boy_or_girl[k]))
 		while person1 == person2:
@@ -165,8 +171,45 @@ def generatequestion(j,k,m,n,l,qnum,h_s,z):
 		block.text(sentence3)	
 		if obj1=='bottle':
 			objectToBeDrawn = "bottle1"	
+		elif obj1=='shoppingcart':
+			objectToBeDrawn = "shopping_cart"	
+		elif obj1=='trees':
+			objectToBeDrawn = "little-tree"	
 		else:
-			objectToBeDrawn = obj1		
+			objectToBeDrawn = obj1	
+	elif qnum==2:
+		person1 = random.choice(eval(boy_or_girl[j]))
+		person2 = random.choice(eval(boy_or_girl[k]))
+		while person1 == person2:
+			person2 = random.choice(eval(boy_or_girl[k]))
+		sentence1 = person1+" "+q[1][0]+" "
+		n1 =str(m)
+		block.text(sentence1)
+		block.text(n1,color=GREEN_TEXT_COLOR)
+		#obj1= random.choice(q[2])
+		sentence2 = " "+q[2][0]+" "+person2 +" "+q[4][0]+" "
+		block.text(sentence2)
+		block.text(str(n),color=GREEN_TEXT_COLOR)
+		sentence3 = " "+q[5][0]+" "
+		block.text(sentence3)
+	elif qnum==3:
+		person1 = random.choice(eval(boy_or_girl[j]))
+		sentence1 = person1+" "+q[1][0]+" "
+		n1 =str(m)
+		block.text(sentence1)
+		block.text(n1,color=GREEN_TEXT_COLOR)
+		obj1= random.choice(q[3])
+		sentence2 = " "+q[3][0]+" "+q[4][0]+" "
+		block.text(sentence2)
+		block.text(str(n),color=GREEN_TEXT_COLOR)
+		sentence3 = " "+q[5][0]+" "+p.plural(obj1)+" "+q[6][0]+" "+p.plural(obj1)+" "+q[7][0]+" "+person1+" "+q[8][0]
+		block.text(sentence3)	
+		if obj1=='bottle':
+			objectToBeDrawn = "bottle1"	
+		elif obj1=='shoppingcart':
+			objectToBeDrawn = "shopping_cart"	
+		else:
+			objectToBeDrawn = obj1					
 	builder.block(block,center = True)
 
 		# create blocks list
