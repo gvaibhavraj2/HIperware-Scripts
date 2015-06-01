@@ -37,19 +37,26 @@ for ques in range(400):
 	block = builder.Block()
 	builder.text("Fill in the blanks:\n",center=True,  color=RED_TEXT_COLOR,font_size=LARGE_FONT_SIZE)
 	builder.block(block,center=True)
-	if minutes>6:
+	if minutes>6 and minutes<12:
 		builder.clock(hours+.5,minutes*5,size = HUGE_PICTURE_SIZE,center=True)
+		print minutes
+	elif minutes==12:
+		minutes=0
+		hours=hours+1
+		if hours>12:
+			hours = hours-12
+		builder.clock(hours,0,size = HUGE_PICTURE_SIZE,center=True)
+		print minutes	
 	else:
-		builder.clock(hours,minutes*5,size = HUGE_PICTURE_SIZE,center=True)	
+		builder.clock(hours,minutes*5,size = HUGE_PICTURE_SIZE,center=True)
+		print minutes	
 	minutes = str(minutes*5).zfill(2)
 	hours = str(hours).zfill(2)
 	#imageBlock = builder.Block()
 	print hours,minutes
-	block.textbox(hours[0],font_size=LARGE_FONT_SIZE)
-	block.textbox(hours[1],font_size=LARGE_FONT_SIZE)
+	block.textbox(hours,font_size=LARGE_FONT_SIZE)
 	block.text(" : ", center=False, color=RED_TEXT_COLOR)
-	block.textbox(minutes[0],font_size=LARGE_FONT_SIZE)
-	block.textbox(minutes[1],font_size=LARGE_FONT_SIZE)
+	block.textbox(minutes,font_size=LARGE_FONT_SIZE)
 	block_list.append(block)
 	builder.blocks(block_list,center=True)
 	counter = counter+1
